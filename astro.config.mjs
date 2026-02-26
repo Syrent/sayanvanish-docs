@@ -2,8 +2,12 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
+const site = process.env.SITE_URL || 'http://localhost:4321';
+const base = process.env.SITE_BASE || '/';
+
 export default defineConfig({
-	site: process.env.SITE_URL || 'http://localhost:4321',
+	site,
+	base,
 	vite: {
 		server: {
 			allowedHosts: ['syrent', 'localhost', '127.0.0.1'],

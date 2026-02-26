@@ -34,6 +34,7 @@ jobs:
         run: npm run build
         env:
           SITE_URL: https://syrent.github.io/sayanvanish-docs
+          SITE_BASE: /sayanvanish-docs
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
