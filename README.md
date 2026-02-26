@@ -1,49 +1,52 @@
-# Starlight Starter Kit: Basics
+# SayanVanish Docs
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Official documentation source for SayanVanish (server setup, operations, and API integration).
 
-```
-npm create astro@latest -- --template starlight
-```
+Live site: https://syrent.github.io/sayanvanish-docs/
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Stack
 
-## 🚀 Project Structure
+- Astro + Starlight
+- Markdown/MDX content
+- GitHub Pages deployment via GitHub Actions
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Local Development
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+Run from the docs project root:
+
+```bash
+cd /home/syrent/IdeaProjects/SayanVanish/docs
+npm install
+npm run dev -- --host 0.0.0.0 --port 4321
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## Build
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+```bash
+cd /home/syrent/IdeaProjects/SayanVanish/docs
+npm run build
+```
 
-Static assets, like favicons, can be placed in the `public/` directory.
+Output is generated in `dist/`.
 
-## 🧞 Commands
+## Content Layout
 
-All commands are run from the root of the project, from a terminal:
+Docs pages live in `src/content/docs/` and are grouped by section:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- `administration/` for server-owner and operator docs
+- `development/` for API and plugin developer docs
+- `index.mdx` for the docs homepage
 
-## 👀 Want to learn more?
+## Deployment
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+The `Syrent/sayanvanish-docs` repository deploys automatically on pushes to `main` using:
+
+- `.github/workflows/deploy.yml`
+
+The workflow builds the site and publishes `dist/` to GitHub Pages.
+
+## Maintenance Notes
+
+- Keep examples aligned with current API names and signatures.
+- Prefer short, task-oriented pages over long narrative text.
+- Validate docs changes locally before pushing.
