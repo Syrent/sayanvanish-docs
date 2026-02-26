@@ -1,0 +1,33 @@
+---
+title: Update and reload
+description: Safe update practices and when to restart instead of reloading.
+sidebar:
+  order: 2
+---
+
+## Update options
+
+- Replace jar manually (baseline recommended).
+- Use force update commands:
+- Paper: `/vanish forceupdate`
+- Velocity: `/sayanvanishproxy forceupdate`
+
+Force update requires a second confirmation run.
+
+## Reload scope (Paper)
+
+`/vanish reload` performs:
+
+1. Feature disable/clear cycle.
+2. Config reload (`settings.yml`, `storage.yml`, `message.yml`, language).
+3. Feature re-discovery and registration.
+
+## Restart instead of reload when
+
+- Changing listener-priority sensitive feature options.
+- Changing dependency/plugin classpath state.
+- Making major storage or messaging topology changes.
+
+:::note
+The default language messages explicitly warn that repeated reloads can cause issues.
+:::

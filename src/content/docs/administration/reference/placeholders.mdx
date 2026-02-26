@@ -1,0 +1,42 @@
+---
+title: Placeholders
+description: PlaceholderAPI and MiniPlaceholders integrations.
+sidebar:
+  order: 8
+---
+
+Hook features expose placeholders when their dependent plugin is installed and feature is enabled.
+
+## PlaceholderAPI (`hook_placeholderapi`)
+
+Namespace: `%sayanvanish_<key>%`
+
+| Key | Meaning |
+| --- | --- |
+| `vanished` | `true` if target player is vanished |
+| `level` | Target player vanish level |
+| `count` | Online vanished count |
+| `vanish_prefix` | Configured prefix if vanished |
+| `vanish_suffix` | Configured suffix if vanished |
+| `online_here` | Visible online players on current server |
+| `online_total` | Visible online players across network |
+| `online_<server_id>` | Visible online players for specific server id |
+
+## MiniPlaceholders (`hook_miniplaceholders`)
+
+Namespace: ``<sayanvanish:<key>>``
+
+| Key | Meaning |
+| --- | --- |
+| `vanished` | Audience player vanished state |
+| `level` | Audience player vanish level |
+| `count` | Online vanished count |
+| `vanish_prefix` | Prefix if vanished |
+| `vanish_suffix` | Suffix if vanished |
+| `online:here` | Visible online players on current server |
+| `online:total` | Visible online players across network |
+| `online:<server_id>` | Visible online players for specific server id |
+
+:::note
+Placeholder results depend on cache freshness, feature state, and proxy/storage configuration.
+:::

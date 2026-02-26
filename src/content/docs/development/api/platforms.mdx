@@ -1,0 +1,66 @@
+---
+title: Platform APIs
+description: Paper and Velocity adapters, helpers, and platform events.
+sidebar:
+  order: 6
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Platform modules provide typed adapters for runtime-specific behavior.
+
+:::note
+Paper-side module and class names use `bukkit` in identifiers for compatibility, but runtime support is Paper/Folia and Paper forks.
+:::
+
+## Paper adapter example
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import org.sayandev.sayanvanish.api.VanishUser;
+import org.sayandev.sayanvanish.paper.api.BukkitPlatformAdapter;
+import org.sayandev.sayanvanish.paper.api.BukkitVanishUser;
+
+VanishUser base = /* load from API */ null;
+if (base == null) return;
+
+BukkitVanishUser paperUser = BukkitPlatformAdapter.get().adapt(base);
+paperUser.hideForAll();
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.sayandev.sayanvanish.paper.api.BukkitPlatformAdapter
+
+val base = /* load from API */ ?: return
+val paperUser = BukkitPlatformAdapter.adapt(base)
+paperUser.hideForAll()
+```
+
+  </TabItem>
+</Tabs>
+
+## Kotlin platform helper example
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+// Java integrations generally use VanishAPI + explicit adapter conversion.
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.sayandev.sayanvanish.paper.api.SayanVanishBukkitAPI.Companion.getOrAddVanishUser
+
+val vanishUser = player.getOrAddVanishUser()
+```
+
+  </TabItem>
+</Tabs>

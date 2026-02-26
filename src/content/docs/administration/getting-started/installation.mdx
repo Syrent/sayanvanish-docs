@@ -1,0 +1,42 @@
+---
+title: Installation
+description: Install and boot SayanVanish for standalone or networked deployments.
+sidebar:
+  order: 2
+---
+
+## Requirements
+
+- Java 21 for current local run tasks in this project.
+- One plugin build per platform (Paper build for backends, Velocity build for proxy).
+
+:::caution
+Spigot and CraftBukkit are not supported targets for this plugin. Use Paper/Folia or Paper-compatible forks.
+:::
+
+## Scenario A: standalone Paper/Folia
+
+1. Place the Paper build in `plugins/`.
+2. Start once to generate config files.
+3. Keep `settings.yml -> general.proxy-mode: false`.
+4. Restart after configuration changes.
+
+Generated files include:
+
+- `settings.yml`
+- `storage.yml`
+- `message.yml`
+- `languages/en_US.yml`
+- `features/`
+
+## Scenario B: Velocity + Paper backends
+
+1. Install Velocity build on proxy.
+2. Install Paper build on every backend.
+3. Set backend `settings.yml -> general.proxy-mode: true`.
+4. Configure shared storage (`MySQL`/`MariaDB`/`Redis`).
+5. Keep messaging/storage configuration consistent across all nodes.
+
+:::caution
+Do not run proxy mode on SQLite. The plugin warns about this at runtime for good reason.
+:::

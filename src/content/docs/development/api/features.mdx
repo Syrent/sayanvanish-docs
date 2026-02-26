@@ -1,0 +1,63 @@
+---
+title: Feature registry API
+description: Read feature state and register custom feature classes.
+sidebar:
+  order: 5
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+`Features` wraps the active `FeatureRegistry`.
+
+## Read and update a feature
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import org.sayandev.sayanvanish.api.feature.Feature;
+import org.sayandev.sayanvanish.api.feature.Features;
+
+Feature feature = Features.getFeatureById("state");
+if (feature != null) {
+    feature.disable();
+    feature.save();
+}
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.sayandev.sayanvanish.api.feature.Features
+
+val feature = Features.getFeatureById("state") ?: return
+feature.disable()
+feature.save()
+```
+
+  </TabItem>
+</Tabs>
+
+## Register a custom feature class
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import org.sayandev.sayanvanish.api.VanishAPI;
+
+VanishAPI.registerFeatureClass(MyFeature.class);
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.sayandev.sayanvanish.api.VanishAPI
+
+VanishAPI.registerFeatureClass(MyFeature::class.java)
+```
+
+  </TabItem>
+</Tabs>

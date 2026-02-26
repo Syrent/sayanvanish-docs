@@ -1,0 +1,51 @@
+---
+title: settings.yml
+description: Platform runtime settings and command naming.
+sidebar:
+  order: 2
+---
+
+`settings.yml` is the first file to review after installation.
+
+## High-impact fields
+
+| Field | Why it matters |
+| --- | --- |
+| `general.server-id` | Uniquely identifies the node in synchronized environments |
+| `general.language` | Selects the language file id |
+| `general.include-prefix-in-messages` | Adds/removes configured prefix from plugin messages |
+| `general.proxy-mode` (Paper) | Enables backend network-aware behavior |
+| `general.purge-online-history-on-startup` (Velocity) | Clears online history state at startup |
+| `vanish-command` / `command` | Main command name and aliases |
+
+## Paper sample
+
+```yaml
+general:
+  server-id: "sayanvanish-..."
+  language: "en_US"
+  include-prefix-in-messages: true
+  bstats: true
+  proxy-mode: false
+vanish-command:
+  name: "vanish"
+  aliases: ["v", "sayanvanish", "sv"]
+```
+
+## Velocity sample
+
+```yaml
+general:
+  server-id: "sayanvanish-..."
+  language: "en_US"
+  purge-online-history-on-startup: true
+  purge-users-on-startup: true
+  include-prefix-in-messages: true
+command:
+  name: "sayanvanishproxy"
+  aliases: ["vp", "vanishp", "svp"]
+```
+
+:::caution
+Keep server ids unique across nodes. Never deploy duplicated generated ids.
+:::

@@ -1,0 +1,34 @@
+---
+title: Enable proxy mode
+description: Transition backend servers from standalone mode to network-aware mode.
+sidebar:
+  order: 1
+---
+
+Enable proxy mode on Paper backends when you need cross-server vanish behavior.
+
+## What changes
+
+With `general.proxy-mode: true` on Paper:
+
+- Messaging reload is enabled during API startup.
+- Local standalone join/quit bookkeeping is reduced.
+- Shared storage quality becomes critical.
+
+## Migration steps
+
+1. Install Velocity plugin.
+2. Install/confirm Paper plugin on all backend nodes.
+3. Set backend `settings.yml -> general.proxy-mode: true`.
+4. Move storage off SQLite.
+5. Restart proxy first, then backends.
+
+## Rollback steps
+
+1. Set backend `general.proxy-mode: false`.
+2. Restart affected backends.
+3. Re-validate standalone persistence behavior.
+
+:::caution
+Do not reuse copied plugin data directories when changing between modes.
+:::

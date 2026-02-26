@@ -1,0 +1,73 @@
+---
+title: Vanish operations
+description: Disappear/appear flows, options, and visibility checks.
+sidebar:
+  order: 3
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Vanish options
+
+`VanishOptions` controls transition behavior (messaging, notifications, join/quit context flags).
+
+## Disappear with options
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import org.sayandev.sayanvanish.api.VanishOptions;
+import org.sayandev.sayanvanish.api.VanishUser;
+
+VanishUser user = VanishUser.getVanishUserFuture(player.getUniqueId()).get();
+if (user == null) return;
+
+VanishOptions options = new VanishOptions.Builder()
+    .sendMessage(true)
+    .notifyStatusChangeToOthers(false)
+    .notifyJoinQuitVanished(true)
+    .build();
+
+user.disappear(options);
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.sayandev.sayanvanish.api.VanishOptions
+import org.sayandev.sayanvanish.api.VanishUser
+
+val user = VanishUser.getVanishUserFuture(player.uniqueId).get() ?: return
+
+val options = VanishOptions.Builder()
+    .sendMessage(true)
+    .notifyStatusChangeToOthers(false)
+    .notifyJoinQuitVanished(true)
+    .build()
+
+user.disappear(options)
+```
+
+  </TabItem>
+</Tabs>
+
+## Visibility policy check
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+boolean canSee = viewer.canSee(target);
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+val canSee = viewer.canSee(target)
+```
+
+  </TabItem>
+</Tabs>

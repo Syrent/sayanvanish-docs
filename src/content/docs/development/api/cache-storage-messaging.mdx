@@ -1,0 +1,50 @@
+---
+title: Cache, storage, and messaging
+description: Correct usage of read cache, persistent storage, and sync transport.
+sidebar:
+  order: 4
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Responsibilities
+
+| Layer | Responsibility |
+| --- | --- |
+| Cache | Fast in-memory reads |
+| Storage | Persistent source of truth |
+| Messaging | Cross-node state propagation |
+
+## Compare cache vs storage
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import org.sayandev.sayanvanish.api.VanishAPI;
+
+int cached = VanishAPI.cacheService().getVanishUsers().getOnlineVanishedCount();
+VanishAPI.database().getVanishUsersFuture().thenAccept(users -> {
+    int persisted = (int) users.stream().filter(u -> u.isOnline() && u.isVanished()).count();
+    System.out.println("cached=" + cached + " persisted=" + persisted);
+});
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import kotlinx.coroutines.runBlocking
+import org.sayandev.sayanvanish.api.VanishAPI
+
+runBlocking {
+    val cached = VanishAPI.cacheService().getVanishUsers().getOnlineVanishedCount()
+    val persisted = VanishAPI.database().getVanishUsers().await().count { it.isOnline && it.isVanished }
+    println("cached=$cached persisted=$persisted")
+}
+```
+
+  </TabItem>
+</Tabs>
+
+If messaging is disabled, local operations still succeed, but sync publication is skipped.

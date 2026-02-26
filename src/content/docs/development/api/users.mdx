@@ -1,0 +1,61 @@
+---
+title: Users and vanish users
+description: Load and persist `User` and `VanishUser` models.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Model split
+
+| Model | Scope |
+| --- | --- |
+| `User` | Identity + online/server state |
+| `VanishUser` | `User` + vanish state, level, and options |
+
+## Load or create, then persist
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import java.util.UUID;
+import org.sayandev.sayanvanish.api.User;
+import org.sayandev.sayanvanish.api.VanishUser;
+
+UUID uuid = player.getUniqueId();
+
+User user = User.getUserFuture(uuid).get();
+if (user == null) {
+    user = new User.Generic(uuid, player.getName(), true, "lobby-1");
+}
+user.saveAndSyncBlocking();
+
+VanishUser vanishUser = VanishUser.getVanishUserFuture(uuid).get();
+if (vanishUser == null) {
+    vanishUser = new VanishUser.Generic(uuid, player.getName(), "lobby-1");
+}
+vanishUser.saveAndSyncBlocking();
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.sayandev.sayanvanish.api.User
+import org.sayandev.sayanvanish.api.VanishUser
+
+val uuid = player.uniqueId
+
+val user = User.getUserFuture(uuid).get()
+    ?: User.Generic(uuid, player.name, true, "lobby-1")
+user.saveAndSyncBlocking()
+
+val vanishUser = VanishUser.getVanishUserFuture(uuid).get()
+    ?: VanishUser.Generic(uuid, player.name, "lobby-1")
+vanishUser.saveAndSyncBlocking()
+```
+
+  </TabItem>
+</Tabs>

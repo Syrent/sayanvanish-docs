@@ -1,0 +1,40 @@
+---
+title: storage.yml
+description: SQL/Redis persistence configuration.
+sidebar:
+  order: 3
+---
+
+`storage.yml` configures persistence for users and vanish users.
+
+## Key fields
+
+| Field | Description |
+| --- | --- |
+| `transaction-thread-count` | Worker threads for transactional storage operations |
+| `method` | Default storage backend (`SQL` or `REDIS`) |
+| `sql.method` | SQL engine (`SQLITE`, `MYSQL`, `MARIADB`) |
+| `redis.standalone.*` | Redis standalone connection settings |
+| `transaction-types` | Transaction routing list (`USER`, `VANISH_USER`) |
+
+## Recommended network example (MySQL)
+
+```yaml
+method: "SQL"
+sql:
+  method: "MYSQL"
+  host: "127.0.0.1"
+  port: 3306
+  database: "sayanvanish"
+  username: "minecraft"
+  password: "change-me"
+transaction-types:
+  - "USER"
+  - "VANISH_USER"
+```
+
+## Guidance
+
+- Standalone servers can use SQLite.
+- Proxy deployments should use shared MySQL/MariaDB/Redis.
+- Validate connectivity before enabling production traffic.

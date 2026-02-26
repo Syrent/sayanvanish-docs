@@ -1,0 +1,34 @@
+---
+title: Overview
+description: What SayanVanish supports and how the project is structured.
+sidebar:
+  order: 1
+---
+
+SayanVanish is a modular vanish system with shared data/messaging layers and platform-specific runtime adapters.
+
+## Supported runtime targets
+
+| Target | Implemented here |
+| --- | --- |
+| Paper and Paper forks (including Folia) | Yes |
+| Velocity | Yes |
+
+## Module map
+
+| Module | Purpose |
+| --- | --- |
+| `sayanvanish-api` | Shared interfaces, storage, cache, messaging, feature system |
+| `sayanvanish-paper` | Paper runtime module (module name kept for API compatibility), commands, events, features |
+| `sayanvanish-proxy` + `sayanvanish-proxy-velocity` | Proxy config/command base and Velocity runtime |
+
+## Runtime lifecycle summary
+
+1. Platform plugin registers the active `Platform` and adapter.
+2. API initializes storage, messaging, and cache services.
+3. Registered features are discovered and loaded from `features/*.yml`.
+4. Runtime actions save to storage and optionally sync through messaging.
+
+:::note
+For networked deployments, use backend proxy mode plus shared storage.
+:::

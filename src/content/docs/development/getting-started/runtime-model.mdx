@@ -1,0 +1,34 @@
+---
+title: Runtime model
+description: How lifecycle, adapters, storage, messaging, and features interact.
+sidebar:
+  order: 2
+---
+
+## Startup sequence
+
+1. Platform plugin sets and registers active `Platform`.
+2. `SayanVanishAPI` initializes storage, messaging, and cache services.
+3. Feature discovery loads `@RegisteredFeature` classes.
+4. Runtime actions persist data and optionally publish sync messages.
+
+## Core abstractions
+
+| Type | Responsibility |
+| --- | --- |
+| `VanishAPI` | Public API entry point |
+| `Platform` | Active runtime metadata and adapter registration |
+| `PlatformAdapter` | Converts shared models to platform-specific models |
+| `Database` | Persistence contract (`TransactionDatabase` by default) |
+| `MessagingService` | Cross-node propagation contract |
+| `CacheService` | In-memory user/vanish snapshots |
+| `FeatureRegistry` | Feature registration and per-user feature toggles |
+
+## Defaults used by this project
+
+- Storage: `TransactionDatabase`
+- Messaging: `TypedMessagingService`
+- Cache: `MemoryCacheService`
+- Visibility policy: `DefaultVisibilityPolicy`
+
+Go to [API introduction](/development/api/introduction/) for direct usage examples.

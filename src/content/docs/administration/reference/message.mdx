@@ -1,0 +1,43 @@
+---
+title: message.yml
+description: Messaging transport for user and vanish synchronization.
+sidebar:
+  order: 4
+---
+
+`message.yml` configures `TypedMessagingService` transports and routing categories.
+
+## Key fields
+
+| Field | Description |
+| --- | --- |
+| `thread-count` | Messaging worker thread count |
+| `redis` | Redis transport connection section |
+| `web-socket-config` | WebSocket transport section |
+| `web-socket-config.auto-host-on-port` | Auto-start a local websocket server when no server is listening on the configured port |
+| `web-socket-config.host-when-auto-hosting` | Bind address for the local auto-hosted websocket server |
+| `category-types` | Category list used to choose transport per sync type |
+
+## Default category mapping
+
+- `SYNC_USER`
+- `SYNC_VANISH_USER`
+
+## Example
+
+```yaml
+thread-count: 5
+redis:
+  standalone:
+    host: "127.0.0.1"
+    port: 6379
+web-socket-config:
+  uri: "ws://localhost:8083"
+  auto-host-on-port: true
+  host-when-auto-hosting: "0.0.0.0"
+category-types:
+  - "SYNC_USER"
+  - "SYNC_VANISH_USER"
+```
+
+If messaging is disabled, local save/update calls still work, but cross-node propagation is skipped.

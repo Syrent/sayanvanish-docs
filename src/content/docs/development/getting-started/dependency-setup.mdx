@@ -1,0 +1,73 @@
+---
+title: Dependency setup
+description: Add SayanVanish artifacts to your build.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Repository configuration
+
+<Tabs>
+  <TabItem label="Gradle Kotlin DSL">
+
+```kotlin
+repositories {
+    maven("https://repo.sayandev.org/snapshots")
+    maven("https://repo.sayandev.org/releases")
+}
+```
+
+  </TabItem>
+  <TabItem label="Maven">
+
+```xml
+<repositories>
+  <repository>
+    <id>sayandev-snapshots</id>
+    <url>https://repo.sayandev.org/snapshots</url>
+  </repository>
+  <repository>
+    <id>sayandev-releases</id>
+    <url>https://repo.sayandev.org/releases</url>
+  </repository>
+</repositories>
+```
+
+  </TabItem>
+</Tabs>
+
+## Artifact selection
+
+| Artifact | Use when |
+| --- | --- |
+| `org.sayandev:sayanvanish-api:<version>` | You only need shared API contracts |
+| `org.sayandev:sayanvanish-bukkit:<version>` | You need Paper platform helpers/events |
+| `org.sayandev:sayanvanish-proxy-velocity:<version>` | You need Velocity platform helpers/events |
+
+<Tabs>
+  <TabItem label="Gradle Kotlin DSL">
+
+```kotlin
+dependencies {
+    compileOnly("org.sayandev:sayanvanish-api:2.0.0-alpha.3")
+}
+```
+
+  </TabItem>
+  <TabItem label="Maven">
+
+```xml
+<dependency>
+  <groupId>org.sayandev</groupId>
+  <artifactId>sayanvanish-api</artifactId>
+  <version>2.0.0-alpha.2</version>
+  <scope>provided</scope>
+</dependency>
+```
+
+  </TabItem>
+</Tabs>
+
+Use `compileOnly`/`provided` scope so the server plugin provides runtime classes.

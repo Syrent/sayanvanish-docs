@@ -1,0 +1,44 @@
+---
+title: Commands
+description: User-facing command surfaces for Paper and Velocity.
+sidebar:
+  order: 6
+---
+
+Command names are configurable in `settings.yml`. Commands below use default names.
+
+## Paper
+
+Main command:
+
+- `/vanish [player] [--state on|off] [--silent|-s]`
+
+Important subcommands:
+
+| Command | Purpose |
+| --- | --- |
+| `/vanish reload` | Reload config and feature registrations |
+| `/vanish forceupdate` | Confirmed update workflow |
+| `/vanish paste` | Generate diagnostic paste output |
+| `/vanish level set <player> <level>` | Set persisted vanish level |
+| `/vanish level get <player>` | Read vanish level |
+| `/vanish feature <feature> disable/enable/reset/status` | Manage feature state |
+| `/vanish feature <feature> update <option> <value>` | Update configurable feature field |
+| `/vanish feature <feature> toggleplayer [player]` | Toggle a feature for one player |
+| `/togglefeature ...` | Alias proxy to feature toggle flow |
+| `/vanish test ...` | Diagnostic helpers |
+
+## Velocity
+
+Main command:
+
+- `/sayanvanishproxy [player] [--state on|off] [--silent|-s]`
+
+Subcommand:
+
+- `/sayanvanishproxy forceupdate`
+
+## Access control
+
+- Root command access requires command permission.
+- Additional actions require dedicated permission nodes.

@@ -1,0 +1,94 @@
+---
+title: Events
+description: Paper cancellable events and Velocity notification events.
+sidebar:
+  order: 7
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Paper events
+
+- `BukkitUserVanishEvent` (cancellable)
+- `BukkitUserUnVanishEvent` (cancellable)
+
+:::note
+Event class names keep the `Bukkit` prefix for API compatibility, but these events are for the Paper-side plugin runtime.
+:::
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.sayandev.sayanvanish.paper.api.event.BukkitUserVanishEvent;
+
+public final class VanishListener implements Listener {
+    @EventHandler
+    public void onVanish(BukkitUserVanishEvent event) {
+        if (shouldBlock(event.getUser().getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.sayandev.sayanvanish.paper.api.event.BukkitUserVanishEvent
+
+class VanishListener : Listener {
+    @EventHandler
+    fun onVanish(event: BukkitUserVanishEvent) {
+        if (shouldBlock(event.user.uniqueId)) {
+            event.isCancelled = true
+        }
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+## Velocity events
+
+- `VelocityUserVanishEvent` (not cancellable)
+- `VelocityUserUnVanishEvent` (not cancellable)
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import com.velocitypowered.api.event.Subscribe;
+import org.sayandev.sayanvanish.velocity.event.VelocityUserVanishEvent;
+
+public final class ProxyVanishListener {
+    @Subscribe
+    public void onVanish(VelocityUserVanishEvent event) {
+        logger.info(event.getUser().getUsername() + " vanished");
+    }
+}
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import com.velocitypowered.api.event.Subscribe
+import org.sayandev.sayanvanish.velocity.event.VelocityUserVanishEvent
+
+class ProxyVanishListener {
+    @Subscribe
+    fun onVanish(event: VelocityUserVanishEvent) {
+        logger.info("${event.user.username} vanished")
+    }
+}
+```
+
+  </TabItem>
+</Tabs>

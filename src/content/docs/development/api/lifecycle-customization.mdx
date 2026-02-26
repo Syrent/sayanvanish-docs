@@ -1,0 +1,53 @@
+---
+title: Lifecycle and customization
+description: Replace default services or visibility policy before initialization.
+sidebar:
+  order: 8
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+You can replace core services before API initialization.
+
+## Replace visibility policy
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import org.sayandev.sayanvanish.api.VanishAPI;
+import org.sayandev.sayanvanish.api.VanishUser;
+import org.sayandev.sayanvanish.api.VisibilityPolicy;
+
+VanishAPI.useVisibilityPolicy(new VisibilityPolicy() {
+    @Override
+    public boolean canSee(VanishUser viewer, VanishUser target) {
+        if (!target.isVanished()) return true;
+        return viewer != null && viewer.getUniqueId().equals(target.getUniqueId());
+    }
+});
+
+VanishAPI.initialize(true);
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.sayandev.sayanvanish.api.VanishAPI
+import org.sayandev.sayanvanish.api.VisibilityPolicy
+
+VanishAPI.useVisibilityPolicy(VisibilityPolicy { viewer, target ->
+    if (!target.isVanished) return@VisibilityPolicy true
+    viewer != null && viewer.uniqueId == target.uniqueId
+})
+
+VanishAPI.initialize(true)
+```
+
+  </TabItem>
+</Tabs>
+
+## Important rule
+
+`useDatabase`, `useMessagingService`, `useCacheService`, `useFeatureRegistry`, and `useVisibilityPolicy` must be called before initialization. Calling them after init is rejected by design.

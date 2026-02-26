@@ -1,0 +1,50 @@
+---
+title: API introduction
+description: Service entry points and lifecycle access.
+sidebar:
+  order: 1
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+`VanishAPI` is the stable facade for storage, cache, messaging, features, and platform context.
+
+## Service access map
+
+| Service | Accessor |
+| --- | --- |
+| Storage | `VanishAPI.database()` |
+| Messaging | `VanishAPI.messagingService()` |
+| Cache | `VanishAPI.cacheService()` |
+| Features | `VanishAPI.featureRegistry()` |
+| Platform | `VanishAPI.platform()` |
+
+## Basic read example
+
+<Tabs>
+  <TabItem label="Java">
+
+```java
+import org.sayandev.sayanvanish.api.VanishAPI;
+import org.sayandev.sayanvanish.api.storage.Database;
+
+Database db = VanishAPI.database();
+int onlineUsers = VanishAPI.cacheService().getUsers().getOnlineCount();
+```
+
+  </TabItem>
+  <TabItem label="Kotlin">
+
+```kotlin
+import org.sayandev.sayanvanish.api.VanishAPI
+
+val db = VanishAPI.database()
+val onlineUsers = VanishAPI.cacheService().getUsers().getOnlineCount()
+```
+
+  </TabItem>
+</Tabs>
+
+## Lifecycle control
+
+Platform plugins handle initialization automatically. If you control lifecycle manually, use `VanishAPI.initialize(...)`, `VanishAPI.reloadMessaging(...)`, and `VanishAPI.shutdown()`.

@@ -1,0 +1,31 @@
+---
+title: First run checklist
+description: Validate core functionality before opening to production traffic.
+sidebar:
+  order: 4
+---
+
+## Startup validation
+
+- Plugin enables without storage or messaging errors.
+- Main command responds:
+- Paper default: `/vanish`
+- Velocity default: `/sayanvanishproxy`
+- Config files are generated in the plugin directory.
+
+## Permission validation
+
+- Operator/admin account has `sayanvanish.vanish.use`.
+- Command root access is granted (`sayanvanish.commands.use` in practice).
+
+## Behavior validation
+
+- Vanish toggle works for self.
+- Vanish visibility behaves as expected for another account.
+- State persistence matches your intended mode (standalone vs proxy).
+
+## Optional diagnostics (Paper)
+
+- `/vanish test users`
+- `/vanish test database data 5`
+- `/vanish feature status state`

@@ -1,0 +1,51 @@
+---
+title: Troubleshooting
+description: Fast diagnosis for common operational failures.
+sidebar:
+  order: 3
+---
+
+## Storage errors on startup
+
+Typical signs:
+
+- SQL/Redis initialization errors in logs.
+- User or vanish state not persisting.
+
+Checks:
+
+1. Verify `storage.yml` credentials and host/port.
+2. Confirm backend service reachability from server host.
+3. Avoid SQLite when using proxy mode.
+
+## Cross-server sync not working
+
+Typical signs:
+
+- Vanish updates apply locally but not on other nodes.
+
+Checks:
+
+1. Confirm backend `general.proxy-mode: true`.
+2. Validate `message.yml` transport and category entries.
+3. Confirm messaging transport is reachable.
+
+## Commands denied
+
+Typical signs:
+
+- Command exists but sender is blocked.
+
+Checks:
+
+1. Grant root command permission for your command set.
+2. Grant required action permissions (see [Permissions](/administration/reference/permissions/)).
+3. Verify vanish level/visibility logic for observer accounts.
+
+## Feature settings appear ignored
+
+Checks:
+
+1. Confirm target feature file is enabled.
+2. Confirm required hook plugin is installed and active.
+3. Confirm per-user feature state was not toggled off.

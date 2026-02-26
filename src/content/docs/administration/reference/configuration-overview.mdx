@@ -1,0 +1,32 @@
+---
+title: Configuration overview
+description: Configuration files, location, and intended responsibility.
+sidebar:
+  order: 1
+---
+
+SayanVanish writes platform config into each plugin's data folder.
+
+## Example paths in this project
+
+| Platform | Path |
+| --- | --- |
+| Paper | `sayanvanish-bukkit/run/bukkit-1/plugins/SayanVanish` |
+| Velocity | `sayanvanish-proxy/sayanvanish-proxy-velocity/run/plugins/sayanvanish` |
+
+## Core files
+
+| File | Responsibility |
+| --- | --- |
+| `settings.yml` | Runtime identity, command naming, platform mode toggles |
+| `storage.yml` | SQL/Redis connection and transaction routing |
+| `message.yml` | Messaging transport and category routing |
+| `languages/*.yml` | User-facing message templates |
+| `features/**/*.yml` | Feature-level behavior controls |
+
+## Read next
+
+- [settings.yml](/administration/reference/settings/)
+- [storage.yml](/administration/reference/storage/)
+- [message.yml](/administration/reference/message/)
+- [features](/administration/reference/features/)

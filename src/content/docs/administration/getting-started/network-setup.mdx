@@ -1,0 +1,34 @@
+---
+title: Network setup
+description: Production checklist for synchronized vanish state across Paper servers.
+sidebar:
+  order: 3
+---
+
+Use this flow for Velocity networks with multiple Paper backend servers.
+
+## 1. Install proxy plugin
+
+- Install the Velocity artifact.
+- Verify proxy data path is created and writable.
+
+## 2. Install backend plugins
+
+- Install Paper artifact on each backend.
+- Enable `general.proxy-mode: true` on each backend.
+
+## 3. Configure shared storage
+
+- Configure `storage.yml` with a shared backend.
+- Use identical connection targets across all nodes.
+
+## 4. Configure messaging
+
+- Configure `message.yml` for your transport choices.
+- Keep category routing aligned across nodes.
+
+## 5. Validate identity and sync
+
+- Keep unique `general.server-id` per node.
+- Never clone one node's generated plugin directory to another.
+- Test vanish on server A, then move to server B and verify expected state.

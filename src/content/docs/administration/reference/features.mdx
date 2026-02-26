@@ -1,0 +1,64 @@
+---
+title: Features
+description: Feature categories and practical configuration examples.
+sidebar:
+  order: 5
+---
+
+SayanVanish behavior is feature-based. Each feature has its own YAML file.
+
+## Category layout
+
+| Category | Directory |
+| --- | --- |
+| Core/default | `features/` |
+| Hook | `features/hooks/` |
+| Prevention | `features/preventions/` |
+
+## Selected examples
+
+### `state.yml` (critical)
+
+```yaml
+type: "state"
+remember: true
+vanish-on-join: false
+reappear-on-quit: false
+check-permission-on-quit: true
+check-permission-on-join: true
+enabled: true
+```
+
+### `level.yml` (critical)
+
+```yaml
+type: "level"
+see-as-spectator: true
+level-method: "PERMISSION"
+enabled: true
+```
+
+### `prevent_chat.yml`
+
+```yaml
+type: "prevent_chat"
+bypass-char: "!"
+priority: "HIGH"
+enabled: true
+```
+
+### `hook_luckperms.yml`
+
+```yaml
+type: "hook_luckperms"
+category: "HOOK"
+register-custom-context: true
+check-permission-via-luck-perms: false
+check-permission-via-luck-perms-features: true
+enabled: true
+plugin: "LuckPerms"
+```
+
+:::note
+You do not need to edit every file. Change only the features you actively use.
+:::
